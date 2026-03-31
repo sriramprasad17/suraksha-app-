@@ -1,184 +1,336 @@
 <div align="center">
 
-# ☸ Suraksha
+# ☸ SURAKSHA
+### Delivery Partner Insurance
 
-*Because every delivery partner deserves to ride without fear.*
+**One Insurance. Every Partner. Every Platform.**
 
-![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=flat-square&logo=vite&logoColor=white)
-![IRDAI](https://img.shields.io/badge/IRDAI-Registered-0D1B3E?style=flat-square)
-![RBI](https://img.shields.io/badge/RBI-PPI_Licence-C8962C?style=flat-square)
-![DPDP](https://img.shields.io/badge/DPDP_Act-2023-1B5E20?style=flat-square)
+![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![IRDAI](https://img.shields.io/badge/IRDAI-Compliant-0D1B3E?style=for-the-badge)
+![RBI](https://img.shields.io/badge/RBI-PPI_Licence-C8962C?style=for-the-badge)
+![DPDP](https://img.shields.io/badge/DPDP_Act-2023-1B5E20?style=for-the-badge)
+
+---
+
+> **India's first universal parametric micro-insurance for gig delivery workers.**
+> When weather turns dangerous, payouts land in your wallet in **60 seconds** — automatically.
+> No forms. No assessors. No waiting.
 
 </div>
 
 ---
 
-It's 2 PM on a Tuesday in Mumbai. The skies open up — 25mm of rain per hour. A delivery partner on Swiggy checks his phone. Zomato is also ringing. He's logged into both, trying to make rent this month.
+## Table of Contents
 
-He rides anyway, because stopping means zero earnings.
-
-**Suraksha exists so he doesn't have to make that choice.**
-
-When rainfall crosses 20mm/hr in his zone, two of three independent data sources confirm it, and he's active on any linked platform — ₹200 lands in his wallet automatically. No form. No call. No waiting. Just a push notification that says *"We got you."*
-
-That's parametric insurance. And it's what Suraksha does — for every delivery partner, across every platform, under one Rs.59 weekly plan.
+- [Overview](#overview)
+- [The Problem](#the-problem)
+- [Live Pages](#live-pages)
+- [Coverage Plans](#coverage-plans)
+- [Parametric Triggers](#parametric-triggers)
+- [Partner Platforms](#partner-platforms)
+- [Weather Alert System](#weather-alert-system)
+- [Payment and Onboarding](#payment-and-onboarding)
+- [AI Engine](#ai-engine)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Key Components](#key-components)
+- [Design System](#design-system)
+- [Compliance](#compliance)
+- [Tech Stack](#tech-stack)
+- [FAQ](#faq)
 
 ---
 
-## What's the problem we're solving?
+## Overview
 
-India has 15 lakh+ gig delivery workers. Most earn Rs.800–1,500 a day. When heavy rain, toxic air, extreme heat, or dense fog hits — their earnings collapse while their accident risk triples.
+Suraksha is a **parametric micro-insurance platform** built for India's 15 lakh+ gig delivery workers across Swiggy, Zomato, Zepto, Amazon Flex, Blinkit, Dunzo, Porter, and Delhivery — all under **one weekly policy**.
 
-Not one platform compensates them. Not one government scheme covers them. And traditional insurance? Gig workers don't qualify — irregular income, no employer, and a 2–4 week claim process that ends in rejection more often than not.
+Unlike traditional insurance, Suraksha uses **live environmental data** (rainfall, AQI, temperature, wind, fog) to fire payouts automatically the moment conditions are confirmed dangerous. The partner never files a claim, never calls anyone, and never waits weeks.
 
-The partner who rides for Swiggy, Zomato, and Zepto simultaneously? He falls through every gap. None of them protect him. On the worst weather days, all three incomes drop at once.
+```
+Partner is riding
+    → Weather crosses threshold
+    → 2/3 data sources confirm
+    → AI validates partner is active
+    → Payout in wallet within 60 seconds
+    → Push notification sent
+```
+
+| Metric | Value |
+|--------|-------|
+| Eligible delivery partners (India, 2024) | **15 Lakh+** |
+| Starting weekly premium | **Rs.29 / week** |
+| Max payout time after trigger | **60 seconds** |
+| Delivery platforms covered | **8 platforms** |
+| Data source consensus required | **2 of 3 sources** |
+| Zone monitoring frequency | **Every 15 minutes** |
+| Zone grid precision | **5km x 5km** |
+
+---
+
+## The Problem
+
+India's gig delivery workers earn Rs.800-1,500 per day. On extreme weather days, earnings collapse while accident risk triples. No platform, government scheme, or existing insurance product protects their income.
+
+| Gap | Impact on Partners |
+|-----|--------------------|
+| No income protection on bad weather days | 50-70% of daily earnings lost per extreme event |
+| Traditional insurance does not fit gig workers | Irregular income, 2-4 week claim cycles, frequent rejections |
+| Multi-platform workers fall through every gap | Working Swiggy + Zepto = zero protection from either on the same day |
+| AQI and heat risk is invisible and ignored | 60+ days/year in Delhi and Lucknow with AQI above 200, zero compensation |
+| No real-time trigger product exists in India | Every existing product is manual, reactive, and slow |
 
 > *"I ride for three apps simultaneously. On a heavy rain day, all three earnings drop at once. I have no insurance from any of them. If I fall, I am finished."*
->
-> — Delivery partner, Hyderabad
-
-Suraksha is the answer to that.
+> 
+> **Delivery Partner, Hyderabad** — Swiggy, Zomato and Zepto
 
 ---
 
-## How it actually works
+## Live Pages
 
-No claims. No assessors. No paperwork. Here's the whole flow:
+The app has **three pages** routed via React `useState` — no React Router required.
+
+### Home Page
+Full marketing website with hero, animated stats, problem cards, 7-step how-it-works with live radar canvas, 6 trigger cards, 8 platform cards, 4 pricing plans, 7 AI engine cards, compliance cards, CTA, and footer.
+
+### Weather Page (`/weather`)
+Live weather monitoring dashboard with:
+- Rotating alert ticker (Mumbai rain / Delhi AQI / Hyderabad heat)
+- City selector for 8 major Indian cities
+- Current conditions card + 6-metric grid (Rainfall / AQI / Temp / Wind / Fog / Zone Status)
+- 8-city data table with colour-coded danger levels
+- 4 safety tip cards per weather condition type
+
+### Payment Page (`/payment`)
+3-step checkout flow:
+1. **Plan Confirm** — Review selected plan with full feature list
+2. **Platform Linking** — Checkbox grid for all 6 platforms (OAuth, no credentials stored)
+3. **Payment** — UPI AutoPay / Swiggy-Zomato Wallet / Debit Card + terms checkbox
+4. **Success Screen** — Policy ID, coverage start date, auto-renewal confirmation
+
+---
+
+## Coverage Plans
+
+| Feature | Basic | Plus | Pro | Pro+ |
+|---------|-------|------|-----|------|
+| **Weekly Premium** | Rs.29 | Rs.59 | Rs.99 | Rs.149 |
+| Heavy Rain Payout | Rs.100/day | Rs.200/day | Rs.350/day | Rs.500/day |
+| AQI / Air Pollution | -- | Rs.150/day | Rs.250/day | Rs.400/day |
+| Heat Wave | -- | -- | Rs.200/day | Rs.350/day |
+| Dense Fog | -- | Rs.150/day | Rs.350/day | Rs.400/day |
+| High Wind / Storm | Rs.100/day | Rs.200/day | Rs.350/day | Rs.500/day |
+| Thunderstorm / Cyclone | Max payout | Max payout | Max payout | Max payout |
+| Accident Cover | Rs.50,000 | Rs.1,00,000 | Rs.2,00,000 | Rs.5,00,000 |
+| **Max Weekly Payout** | Rs.300 | Rs.700 | Rs.1,400 | Rs.2,500 |
+| Platforms Linked | Up to 2 | Up to 4 | Unlimited | Unlimited + Priority |
+| 24x7 AI Chatbot | Basic | Standard | Priority | Priority+ |
+
+> A Rs.59 Plus plan costs less than **0.8% of average weekly earnings**. One rain payout = **3x your premium recovered**.
+
+All plans auto-renew every Monday via UPI AutoPay. Cancel, upgrade, or downgrade any Monday — **zero lock-in, zero penalty**.
+
+---
+
+## Parametric Triggers
+
+Payouts fire **automatically** when conditions are confirmed by **2 of 3 independent data sources** in the partner's active 5km x 5km zone.
+
+| Trigger | Threshold | Plans | Daily Payout Range |
+|---------|-----------|-------|--------------------|
+| Heavy Rain | > 20mm/hr for 30+ min | All tiers | Rs.100-500 |
+| Air Pollution (AQI) | AQI > 200 for 2+ hrs | Plus, Pro, Pro+ | Rs.150-400 |
+| Heat Wave | Feels-like > 45C for 4+ hrs | Pro, Pro+ | Rs.200-350 |
+| Dense Fog | Visibility < 200m for 2+ hrs | Plus, Pro, Pro+ | Rs.150-400 |
+| High Wind / Storm | Wind > 50km/hr for 1+ hr | All tiers | Rs.100-450 |
+| Thunderstorm / Cyclone | IMD severe weather warning | All tiers | Max tier + safety alert |
+
+### Validation Rules
 
 ```
-You link your platforms (Swiggy, Zomato, Zepto...)
-         ↓
-You pick a weekly plan — from Rs.29 to Rs.149
-         ↓
-Suraksha watches your zone every 15 minutes, 24×7
-         ↓
-Weather crosses the threshold + 2/3 data sources confirm
-         ↓
-AI checks you were actually riding (anti-gaming)
-         ↓
-₹ lands in your wallet within 60 seconds
-         ↓
-You get a push notification. That's it.
+Multi-source consensus  ->  2 of 3 sources must agree
+                            (OpenWeatherMap + IMD Nowcast + CPCB/Weather.com)
+
+Zone precision          ->  5km x 5km grid
+                            Koramangala is unaffected by Whitefield trigger events
+
+Duration requirement    ->  Condition must persist minimum time
+                            A 5-minute rain burst does not qualify
+
+Active partner check    ->  Partner must be online on at least 1 linked platform
+                            during the trigger window to prevent gaming
 ```
 
-The whole thing is automatic. You set it up once on a Monday and forget it exists — until the day it pays you.
+**Data sources:** OpenWeatherMap API, IMD Nowcast, CPCB AQI stations, Weather.com commercial API, satellite weather feeds.
 
 ---
 
-## What triggers a payout?
+## Partner Platforms
 
-| What's happening outside | When it triggers | Plans covered | What you get |
-|--------------------------|-----------------|---------------|--------------|
-| 🌧️ Heavy rain | > 20mm/hr for 30+ minutes | All plans | Rs.100–500/day |
-| 🌫️ Toxic air (AQI) | AQI > 200 for 2+ hours | Plus, Pro, Pro+ | Rs.150–400/day |
-| 🌡️ Extreme heat | Feels like > 45°C for 4+ hours | Pro, Pro+ | Rs.200–350/day |
-| 🌁 Dense fog | Visibility < 200m for 2+ hours | Plus, Pro, Pro+ | Rs.150–400/day |
-| 🌪️ High winds | Wind > 50km/hr for 1+ hour | All plans | Rs.100–450/day |
-| ⛈️ Thunderstorm / cyclone | IMD severe warning issued | All plans | Maximum payout + safety alert |
+One Suraksha policy covers **all linked platforms simultaneously**.
 
-Three things must be true before any payout fires:
-- **Two of three data sources agree** (OpenWeatherMap, IMD Nowcast, CPCB/Weather.com — one faulty sensor can't fake a trigger)
-- **The condition lasts long enough** (a 5-minute rain burst isn't a trigger — sustained dangerous weather is)
-- **You were actually riding** (you must be active on at least one linked platform during the window)
+| Platform | Category | Active Partners |
+|----------|----------|-----------------|
+| Swiggy | Food and Grocery Delivery | 3,00,000+ |
+| Zomato | Food Delivery | 3,50,000+ |
+| Zepto | 10-min Grocery | 30,000+ |
+| Amazon Flex | E-commerce | 1,20,000+ |
+| Blinkit | Quick Commerce | 40,000+ |
+| Dunzo | Hyperlocal | 20,000+ |
+| Porter | Logistics | 50,000+ |
+| Delhivery | E-commerce Logistics | 2,00,000+ |
 
----
-
-## The plans
-
-| | Basic | Plus | Pro | Pro+ |
-|-|-------|------|-----|------|
-| **Weekly cost** | **Rs.29** | **Rs.59** | **Rs.99** | **Rs.149** |
-| Rain payout | Rs.100/day | Rs.200/day | Rs.350/day | Rs.500/day |
-| AQI payout | — | Rs.150/day | Rs.250/day | Rs.400/day |
-| Heat wave | — | — | Rs.200/day | Rs.350/day |
-| Dense fog | — | Rs.150/day | Rs.350/day | Rs.400/day |
-| Wind / storm | Rs.100/day | Rs.200/day | Rs.350/day | Rs.500/day |
-| Cyclone / IMD alert | Max payout | Max payout | Max payout | Max payout |
-| Accident cover | Rs.50,000 | Rs.1,00,000 | Rs.2,00,000 | Rs.5,00,000 |
-| Max per week | Rs.300 | Rs.700 | Rs.1,400 | Rs.2,500 |
-| Platforms linked | Up to 2 | Up to 4 | Unlimited | Unlimited + priority |
-
-Rs.59 is less than 0.8% of average weekly earnings. If Suraksha fires even one rain payout, you've recovered 3× what you paid. Cancel any Monday. Zero lock-in. Zero penalty. Ever.
+**Total addressable market: 12-15 lakh active delivery partners** across India (2024).
 
 ---
 
-## Which platforms are covered?
+## Weather Alert System
 
-One plan. All of them, simultaneously.
+The weather dashboard monitors 8 major Indian cities in real time with live data from CPCB, IMD, and OpenWeatherMap:
 
-| Platform | What they do | Partners covered |
-|----------|-------------|-----------------|
-| 🛵 Swiggy | Food and grocery | 3,00,000+ |
-| 🍽️ Zomato | Food delivery | 3,50,000+ |
-| ⚡ Zepto | 10-minute grocery | 30,000+ |
-| 📦 Amazon Flex | E-commerce | 1,20,000+ |
-| 🛍️ Blinkit | Quick commerce | 40,000+ |
-| 🏃 Dunzo | Hyperlocal runs | 20,000+ |
-| 🚚 Porter | Logistics | 50,000+ |
-| 📬 Delhivery | E-commerce logistics | 2,00,000+ |
+| City | Temp | Feels Like | AQI | Rain | Status |
+|------|------|-----------|-----|------|--------|
+| Mumbai | 31C | 38C | 82 | 28mm/hr | RAIN ALERT ACTIVE |
+| Delhi | 38C | 44C | 245 | 0mm/hr | AQI DANGER ACTIVE |
+| Chennai | 35C | 41C | 98 | 4mm/hr | Clear |
+| Hyderabad | 42C | 47C | 112 | 0mm/hr | HEAT ALERT ACTIVE |
+| Bengaluru | 27C | 29C | 68 | 2mm/hr | Normal |
+| Kolkata | 33C | 40C | 145 | 14mm/hr | WIND ALERT ACTIVE |
+| Pune | 29C | 33C | 75 | 6mm/hr | Light Rain |
+| Ahmedabad | 43C | 48C | 168 | 0mm/hr | EXTREME HEAT ACTIVE |
 
-If you're simultaneously active on Swiggy and Zomato when a trigger fires — you get one payout, not two. The AI handles cross-platform attribution correctly.
-
----
-
-## The weather dashboard
-
-The app has a live weather page that monitors 8 major Indian cities in real time. Every city shows current conditions, trigger status, and whether a payout is actively processing.
-
-| City | What's happening right now |
-|------|---------------------------|
-| Mumbai | 🔴 Rain 28mm/hr — Rain trigger ACTIVE |
-| Delhi | 🔴 AQI 245 — Pollution trigger ACTIVE |
-| Hyderabad | 🔴 Feels like 47°C — Heat wave ACTIVE |
-| Kolkata | 🔴 Wind 24km/hr — Wind trigger ACTIVE |
-| Chennai | ✅ Clear — No active triggers |
-| Bengaluru | ✅ Normal — No active triggers |
-| Pune | 🟡 Light rain — Below threshold |
-| Ahmedabad | 🔴 Feels like 48°C — Heat wave ACTIVE |
-
-When a trigger fires, partners also get safety tips pushed to their phone — slow down, wear your N95, don't ride through that flooded street.
+Safety advisories are pushed to all active partners in affected zones when triggers fire.
 
 ---
 
-## Getting set up (for riders)
+## Payment and Onboarding
 
-Getting protected takes about 5 minutes. Less if you're already KYC-verified on Swiggy or Zomato.
+Partners go from **zero to protected in under 5 minutes** on a 2G connection.
 
-1. Open Suraksha inside your Swiggy or Zomato partner app
-2. Link all your delivery platforms in one go
-3. Aadhaar eKYC via DigiLocker — auto-fills everything (or skip entirely if already verified)
-4. Choose your plan
-5. Set up UPI AutoPay — approve once in GPay or PhonePe, never think about it again
+```
+Step 1  ->  Link all platforms (Swiggy, Zomato, Zepto, Amazon, Blinkit...)
+Step 2  ->  Aadhaar eKYC via DigiLocker (skipped if already verified on Swiggy/Zomato)
+Step 3  ->  Choose weekly plan (Basic / Plus / Pro / Pro+)
+Step 4  ->  Set UPI AutoPay mandate (GPay / PhonePe / Paytm / Platform Wallet)
+            |
+            Coverage active. Monitoring starts. No further action needed ever.
+```
 
-That's it. Every Monday the premium deducts. Every time weather turns dangerous, your wallet gets topped up automatically.
+### Supported Payment Methods
 
-### Ways to pay
-
-| Method | How it works |
-|--------|-------------|
-| UPI AutoPay | Approve once in GPay / PhonePe / Paytm — auto weekly debit every Monday |
-| Platform wallet | Direct deduct from your Swiggy or Zomato wallet — nothing new to set up |
-| Debit card | Rupay, Visa, Mastercard — any bank works |
+| Method | Details |
+|--------|---------|
+| UPI AutoPay (Recommended) | GPay, PhonePe, Paytm, any BHIM UPI — one-time approval, auto weekly debit |
+| Platform Wallet | Swiggy / Zomato wallet auto-deduct — no new payment instrument required |
+| Debit Card | Rupay / Visa / Mastercard — all nationalised and private banks in India |
 
 ---
 
-## Getting started (for developers)
+## AI Engine
+
+Seven interdependent AI systems power Suraksha's operations:
+
+```
+NEURAL TRIGGER EVALUATION PIPELINE
+===================================
+
+[Data In]    Rain  AQI  Temp  Wind    (3 independent data sources polled)
+     |
+[Validation] V1 --- V2 --- V3         (2-of-3 consensus gate)
+     |
+[AI Model]   ML --- RF --- AI         (Random Forest classifier + rule engine)
+     |
+[Decision]   APPROVE  /  REJECT        (entire path under 60 seconds)
+     |
+[Payout]     Rs. -> Partner Wallet    (Swiggy / Zomato / Suraksha wallet)
+```
+
+| # | Component | Model | Purpose |
+|---|-----------|-------|---------|
+| 1 | Trigger Evaluation Engine | Rule engine + Random Forest | 2/3 source validation, sub-60s decision |
+| 2 | City-Level Threshold Calibration | LSTM time-series | Per-city thresholds, re-calibrates quarterly |
+| 3 | Multi-Platform Fraud Detection | Isolation Forest + GPS anomaly | GPS spoofing, fake activity, coordinated gaming |
+| 4 | Risk-Based Dynamic Pricing | LSTM + gradient boosting | 7-day risk forecast, monsoon premium adjustment |
+| 5 | Multi-Platform Partner Intelligence | Graph neural network | Cross-platform attribution, payout deduplication |
+| 6 | AI Chatbot - Hindi and English 24x7 | Claude API + LangChain + Pinecone RAG | Context-aware partner query resolution |
+| 7 | Actuarial Risk Modelling | Monte Carlo + XGBoost | Loss ratio projection, reinsurance structuring |
+
+---
+
+## Project Structure
+
+```
+suraksha-app-/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── SurakshaApp.jsx     # Main app — all components in one file
+│   ├── main.jsx            # React entry point
+│   └── index.css           # Global styles (full-width fix required)
+├── index.html
+├── package.json
+├── vite.config.js
+├── eslint.config.js
+└── README.md
+```
+
+### SurakshaApp.jsx — Component Map
+
+```
+SurakshaApp (default export)
+|
+|-- Chakra          SVG Ashoka Chakra logo (24 spokes, configurable size/color/speed)
+|-- Fade            Scroll-reveal wrapper (IntersectionObserver based)
+|-- Num             Animated counter (0 to target on viewport entry)
+|-- Radar           Live canvas radar animation (rotating sweep + partner dots)
+|
+|-- WeatherPage     Full weather monitoring dashboard
+|   |-- City selector (8 cities)
+|   |-- Current conditions card
+|   |-- 6-metric grid (Rain / AQI / Temp / Wind / Fog / Zone)
+|   |-- 8-city data table with danger levels
+|   `-- 4 safety tip cards
+|
+`-- PaymentPage     3-step checkout flow
+    |-- Step 1: Plan Confirm
+    |-- Step 2: Platform Linking (OAuth checkbox grid)
+    |-- Step 3: UPI / Wallet / Card Payment
+    `-- Step 4: Success Screen with policy ID
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/sriramprasad17/suraksha-app-.git
 cd suraksha-app-
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
 ```
 
-Then open `http://localhost:5173`.
+Open `http://localhost:5173` in your browser.
 
-### Fix the black side bars first
+### Critical — Fix Full-Width Layout
 
-Before anything else, add this to `src/index.css`. Without it, Vite's default layout gives you black bars on the left and right of the page.
+Add this to `src/index.css` to prevent black side bars:
 
 ```css
+/* src/index.css */
 html, body, #root {
   width: 100%;
   max-width: 100%;
@@ -188,210 +340,210 @@ html, body, #root {
 }
 ```
 
-### Build and deploy
+Without this, Vite's default `#root` container limits the layout width and shows **black side bars** on the left and right of the page.
+
+### Build for Production
 
 ```bash
-npm run build     # Output goes to /dist
-npm run preview   # Preview the production build locally
-npm run lint      # ESLint checks
+npm run build      # Outputs to /dist folder
+npm run preview    # Preview production build locally
+npm run lint       # Run ESLint checks
 ```
 
 ---
 
-## How the codebase is organized
+## Key Components
 
-```
-suraksha-app-/
-├── src/
-│   ├── SurakshaApp.jsx   ← The whole app lives here (single file)
-│   ├── main.jsx          ← React entry point
-│   └── index.css         ← Global styles (add the full-width fix here)
-├── public/
-├── index.html
-├── package.json
-└── vite.config.js
-```
+### Chakra — Ashoka Chakra Logo
 
-The entire app — all three pages, all components, all data, all styles — lives in one file: `SurakshaApp.jsx`. No separate CSS files. No external component libraries. Just React hooks and inline styles.
-
-### The three pages
-
-There's no React Router. Pages switch via `useState`:
+The Suraksha logo is a pure SVG React component — not an image file. It renders the authentic Ashoka Chakra with 24 equally-spaced spokes, outer ring, inner ring, and centre hub. Rotates continuously via CSS animation.
 
 ```jsx
-const [page, setPage] = useState("home"); // "home" | "weather" | "payment"
+<Chakra
+  size={28}          // Size in pixels — any value, scales perfectly
+  color="#E8B84B"    // Hex color string
+  speed="8s"         // CSS animation-duration string
+/>
 ```
 
-**Home** — The full marketing site. Hero with the animated Ashoka Chakra, platform ticker, animated counters, problem section, how-it-works with a live radar canvas, triggers, platforms, pricing, AI engine, compliance, CTA, footer.
+| Usage | Size | Color | Speed |
+|-------|------|-------|-------|
+| Navbar | 28px | Gold #E8B84B | 8s |
+| Hero background | 480px | White, 7% opacity | 24s |
+| CTA section | 580px | White, 5% opacity | 28s |
+| Footer | 20px | Gold #E8B84B | 8s |
 
-**Weather** — Live city monitoring dashboard. Select a city, see current conditions, check which triggers are active, read safety tips. The 8-city data table highlights danger levels in red.
-
-**Payment** — Three-step checkout. Pick your plan, link your platforms (OAuth — we never see your password), set up payment, get your policy ID.
-
----
-
-## The components worth knowing about
-
-### The Ashoka Chakra (Chakra component)
-
-The logo is a pure SVG component, not an image. It draws the real Ashoka Chakra — 24 spokes, outer ring, inner ring, centre hub — and rotates continuously. No file to host. Scales perfectly at any size.
+### Fade — Scroll Reveal
 
 ```jsx
-// Used across the app at different sizes
-<Chakra size={28} color="#E8B84B" speed="8s" />    // navbar
-<Chakra size={480} color="#fff" speed="24s" />      // hero background (7% opacity)
-<Chakra size={580} color="#fff" speed="28s" />      // CTA background (5% opacity)
-```
-
-### Scroll reveal (Fade component)
-
-```jsx
-<Fade delay={0.1}>
-  <p>This fades in when you scroll to it</p>
+<Fade delay={0.1} style={{ maxWidth: 600 }}>
+  <YourContent />
 </Fade>
 ```
 
-Uses `IntersectionObserver` under the hood. Fires once. Accepts a `delay` in seconds so staggered reveals don't all fire at the same time.
+Uses `IntersectionObserver` to trigger a fade + slide-up animation when the element enters the viewport. Accepts `delay` in seconds and a `style` prop.
 
-### The radar animation (Radar component)
+### Radar — Live Zone Canvas
 
-Pure HTML5 Canvas — no chart library, no Three.js. A rotating sweep arm, five delivery zones drawn as circles, and ten partner dots moving around the map. It's what shows on the "How It Works" section to represent live zone monitoring.
+Pure HTML5 Canvas animation with no library dependency. Renders a rotating radar sweep, zone boundary circles, and animated partner location dots. Represents the real-time 5km x 5km zone monitoring system visually.
 
-### Animated counters (Num component)
+### Page Routing
 
-The stat numbers on the homepage — 15, 29, 60, 8 — count up from zero when you scroll into view. Uses `IntersectionObserver` + `requestAnimationFrame`. Fires once per page load.
+```jsx
+// Three pages, zero dependencies — pure useState routing
+const [page, setPage] = useState("home"); // "home" | "weather" | "payment"
 
----
-
-## The design
-
-The whole visual identity is built around one idea: Suraksha should feel like something you trust with your livelihood. That means it looks like a premium insurance brand — not a fintech startup.
-
-**Colors that carry meaning:**
-
-| Color | Hex | Why it's there |
-|-------|-----|----------------|
-| Deep navy | #0D1B3E | Stability, authority, trust — hero, nav, footer |
-| Warm gold | #C8962C | Value, protection, India — every CTA and accent |
-| Gold light | #E8B84B | The Ashoka Chakra, italic text, featured elements |
-| Cream | #F7F3EC | Warmth, tradition — alternating section backgrounds |
-| White | #FFFFFF | Clarity — cards, table rows |
-| Steel gray | #7A8BB0 | Everything that's secondary and shouldn't shout |
-
-**Two fonts, both deliberate:**
-
-- **Playfair Display** (serif) for headings and the brand name — it's the font of policy documents and insurance certificates. It signals "this is real."
-- **Nunito Sans** for everything else — approachable, readable, never precious.
-
-**No CSS framework.** All styles are inline JavaScript objects. The app ships with zero Tailwind, zero Bootstrap, zero MUI. The font stack loads via `@import` inside the injected `<style>` tag — no npm package needed.
+// Navigate between pages
+<button onClick={() => setPage("payment")}>Get Protected</button>
+<button onClick={() => setPage("weather")}>View Weather Alerts</button>
+<button onClick={() => setPage("home")}>Back to Home</button>
+```
 
 ---
 
-## The AI behind the scenes
+## Design System
 
-Seven ML systems run Suraksha. They're not independent — they feed each other.
+### Color Palette
 
-**Trigger Evaluation Engine** *(Random Forest + rule engine)*
-The core decision-maker. Takes data from three independent weather sources, checks partner activity, runs conditions against plan thresholds, and decides approve or reject — in under 60 seconds, with no human in the loop.
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Navy (Primary) | #0D1B3E | Hero, navigation, footer, section accents, headings |
+| Gold (Brand) | #C8962C | CTA buttons, borders, eyebrow labels, trigger highlights |
+| Gold Light | #E8B84B | Ashoka Chakra logo, hero italic text, AI section accents |
+| Cream (Background) | #F7F3EC | Alternating section backgrounds throughout |
+| White | #FFFFFF | Card backgrounds, table rows |
+| Text Gray | #7A8BB0 | Body copy, muted labels, secondary information |
 
-**City-Level Threshold Calibration** *(LSTM)*
-Bengaluru's monsoon is different from Delhi's. This model uses three years of weather, delivery volume, and incident data to set the right thresholds per city. Re-runs every quarter as conditions change.
+### Typography
 
-**Multi-Platform Fraud Detection** *(Isolation Forest + GPS anomaly detection)*
-Watches for GPS spoofing, fake activity signals, and coordinated gaming across all platforms simultaneously. Target: below 0.5% false payout rate without flagging genuine claims.
+| Usage | Font | Weight |
+|-------|------|--------|
+| Display headings and brand name | Playfair Display (serif) | 700-800 |
+| Italic emphasis in hero and subtitles | Playfair Display Italic | 700 |
+| Body text, labels, navigation links | Nunito Sans | 300 / 400 / 600 / 700 |
+| Eyebrow labels above section headings | Nunito Sans uppercase, 0.6rem, 2.5px letter-spacing | 700 |
+| Code snippets and policy IDs | Courier New | monospace |
 
-**Risk-Based Dynamic Pricing** *(LSTM + gradient boosting)*
-Forecasts zone-level risk 7 days ahead. When a cyclone is coming or AQI is forecast to spike, premiums adjust to keep Suraksha actuarially viable through extreme seasons.
+Fonts are loaded via `@import` inside the injected CSS string in `SurakshaApp.jsx` — no npm package required.
 
-**Multi-Platform Partner Intelligence** *(Graph neural network)*
-When you're active on Swiggy and Zomato at the same time, this model correctly attributes your zone, your activity, and your payout eligibility. One partner, one payout, regardless of how many apps are open.
+### CSS Animations
 
-**AI Chatbot — Hindi and English 24×7** *(Claude API + LangChain + Pinecone RAG)*
-Answers "Why didn't I get paid yesterday?" with your actual trigger log, your zone's weather data, and your specific plan details — not a scripted FAQ response. Works in Hindi and English.
+```css
+@keyframes surSpin   { to { transform: rotate(360deg); } }
+/* Used for: Ashoka Chakra logo rotation */
 
-**Actuarial Risk Modelling** *(Monte Carlo + XGBoost)*
-Projects expected claim rates, payout volumes, and loss ratios by zone, platform, and season. This is what drives pricing decisions and reinsurance structuring every quarter.
+@keyframes surMarq   { to { transform: translateX(-50%); } }
+/* Used for: Platform name ticker marquee */
 
----
+@keyframes surBlink  { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+/* Used for: Alert dot pulse on weather ticker */
 
-## The regulatory side
-
-Suraksha is built compliant — not retrofitted after the fact.
-
-| Regulation | What we did |
-|------------|-------------|
-| IRDAI Insurance Distribution | Embedded distributor via Digit Insurance and ICICI Lombard. Platforms register as Corporate Agents — no extra licensing burden on them |
-| RBI PPI Wallet Licence | Payout wallet runs under a Prepaid Payment Instrument licence via NBFC partner. Auto-debit follows RBI's UPI AutoPay e-mandate rules |
-| DPDP Act 2023 | Explicit consent at onboarding. Data retention capped at 24 months. Right to erasure and portability supported in-app |
-| Data minimisation | All trigger data is zone-level aggregate — never tied to a specific person. GPS for anti-fraud is processed on-device and never sent to our servers |
-| Platform data isolation | Swiggy's data never touches Zomato's data. Separate encrypted namespaces at the infrastructure level |
-| Security | AES-256 at rest. TLS 1.3 in transit. API credentials in AWS Secrets Manager. Annual third-party penetration test |
-
----
-
-## For delivery platforms (B2B)
-
-If you're building for a delivery platform and want to integrate Suraksha, the integration takes 3–5 engineering days via REST API.
-
-You get full SDKs (Node.js, Python, Java), a sandbox environment, and a dedicated integration engineer. Suraksha handles KYC, premium collection, trigger evaluation, payouts, compliance, and reporting — your team integrates once and moves on.
-
-Optional: co-fund partner premiums as a welfare benefit. Platforms that cover the Basic tier (Rs.29/week) for all active partners use it as a genuine recruitment and retention differentiator.
-
-Partners see payouts with your platform branding. We handle the insurance accounting.
+@keyframes surFU     { from { opacity: 0; transform: translateY(14px); }
+                       to   { opacity: 1; transform: translateY(0); } }
+/* Used for: Hero section fade-up entrance animation */
+```
 
 ---
 
-## Common questions
+## Compliance
 
-**What is parametric insurance, really?**
-
-It's insurance that pays based on what happened in the world — not on what you claim happened to you. When rainfall hits 20mm/hr in your zone, confirmed by two independent sources, the payout fires. No one assesses your loss. No one decides if you deserve it. The conditions are objective, the data is live, and the decision is automatic.
-
-**I ride for three platforms. Am I covered on all of them simultaneously?**
-
-Yes. One Suraksha policy covers all linked platforms at once. If you're active on Swiggy and Zomato when a trigger fires, you get one payout — correctly attributed by our graph model. Not two. Not zero. One.
-
-**Weather was bad yesterday. Why didn't I get paid?**
-
-One of three things: the condition didn't quite hit the threshold (18mm/hr rain when 20mm is needed), only one data source confirmed it instead of two, or you weren't showing as active on any linked platform during the window. Ask the AI chatbot — it'll tell you exactly which one, using your actual data.
-
-**What if I want to cancel?**
-
-Any Monday. In-app. Zero penalty. Your coverage runs to the end of the current week and then stops. No notice period, no fee, no questions asked.
-
-**Is my login stored anywhere?**
-
-No. Platform linking uses OAuth — you authorise Suraksha to receive anonymised zone data and nothing else. Your delivery history, earnings, ratings, and personal data stay entirely inside each platform's system. We never see it.
+| Framework | Approach |
+|-----------|---------|
+| IRDAI Insurance Distribution | Embedded distributor via Digit Insurance / ICICI Lombard. Platforms act as Corporate Agents — zero additional licensing burden for platforms |
+| RBI PPI Wallet Licence | Payout wallet under Prepaid Payment Instrument licence via NBFC partner. Auto-debit under RBI UPI AutoPay e-mandate framework |
+| DPDP Act 2023 | Explicit consent at onboarding. Data retention capped at 24 months. Right to erasure and portability fully supported in-app |
+| Zone-Level Data Only | All trigger data is zone-level aggregate — never personal. GPS for anti-fraud is on-device, AES-256 encrypted, never shared |
+| Platform Data Isolation | Each platform's data in separate encrypted namespaces. Swiggy data is architecturally isolated from Zomato data |
+| End-to-End Security | AES-256 at rest, TLS 1.3 in transit, AWS Secrets Manager for API credentials, annual third-party security audit |
 
 ---
 
-## What's in the stack
+## Tech Stack
 
-| Layer | What we use |
-|-------|------------|
-| Frontend | React 18, Vite 5, plain JavaScript |
-| Styling | Inline JS style objects — no CSS framework |
-| Animation | CSS keyframes + HTML5 Canvas |
-| API layer | Node.js + FastAPI |
-| Trigger engine | Python + FastAPI |
-| Data pipeline | Apache Kafka + Apache Spark |
-| Database | PostgreSQL + Redis |
-| ML | Python, scikit-learn, TensorFlow |
+### Frontend (This Repository)
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 18+ |
+| Bundler | Vite 5 |
+| Language | JavaScript (JSX) |
+| Styling | Inline JS style objects — zero CSS framework dependency |
+| Fonts | Google Fonts via @import (Playfair Display + Nunito Sans) |
+| Animation | CSS keyframes + HTML5 Canvas (useRef + requestAnimationFrame) |
+| Routing | useState — no React Router |
+| State Management | React hooks only (useState, useEffect, useRef) |
+
+### Backend and Infrastructure (Production)
+
+| Layer | Technology |
+|-------|-----------|
+| API Gateway | Node.js + FastAPI |
+| Trigger Engine | Python + FastAPI (real-time data ingestion) |
+| Data Pipeline | Apache Kafka + Apache Spark |
+| Database | PostgreSQL (primary) + Redis (cache) |
+| ML Platform | Python + scikit-learn + TensorFlow |
 | Payments | Razorpay + UPI AutoPay |
 | Cloud | AWS EKS (Kubernetes) |
-| Monitoring | Grafana + Prometheus |
+| Observability | Grafana + Prometheus |
+| Secrets | AWS Secrets Manager + HashiCorp Vault |
 | CI/CD | GitHub Actions |
+
+---
+
+## FAQ
+
+**What is parametric insurance?**
+
+Parametric insurance pays out automatically when a pre-defined condition is confirmed by objective data — no claim submission, no assessor, no approval process. Traditional insurance requires claim submission, evidence of loss, assessor visit, and a decision process. Suraksha's parametric model eliminates all of that. Payouts fire in 60 seconds.
+
+---
+
+**What if I work on Swiggy and Zomato simultaneously?**
+
+One Suraksha policy covers all linked platforms simultaneously. If you are active on both during a trigger event, you receive a single payout — not two separate payouts. The Multi-Platform Partner Intelligence AI correctly identifies and attributes cross-platform activity.
+
+---
+
+**What if weather is bad but I do not get a payout?**
+
+Three scenarios: (1) The condition did not reach the trigger threshold — for example, 18mm/hr rainfall when the trigger requires 20mm/hr. (2) Only 1 of 3 data sources confirmed the condition, so 2/3 consensus was not reached. (3) You were not active on any linked platform during the trigger window. The AI Chatbot explains exactly why any specific event did not trigger.
+
+---
+
+**Can I cancel my plan?**
+
+Yes — cancel any Monday in-app with zero penalty. Your coverage continues until the end of the current week. No lock-in, no cancellation fee, no notice period required.
+
+---
+
+**Is my platform login data stored?**
+
+No. Suraksha uses OAuth-based platform linking — we receive anonymised zone-level data only. Your delivery history, earnings, ratings, and personal data remain entirely within each platform's systems.
+
+---
+
+**Is Suraksha registered with IRDAI?**
+
+Yes. Suraksha operates as an embedded insurance distributor under IRDAI's corporate agent framework, partnered with Digit Insurance and ICICI Lombard as the licensed insurers.
+
+---
+
+## License
+
+This project is proprietary software. All rights reserved.
+
+Copyright 2025 Suraksha Insurance Tech Pvt. Ltd.
 
 ---
 
 <div align="center">
 
+IRDAI Registered Distributor &nbsp;·&nbsp; RBI PPI Licence &nbsp;·&nbsp; DPDP Act 2023 &nbsp;·&nbsp; Not an investment product
+
 ---
 
-IRDAI Registered &nbsp;·&nbsp; RBI PPI Licence &nbsp;·&nbsp; DPDP Act 2023
+*Built for India's 15 lakh+ delivery partners*
 
-*For India's 15 lakh+ delivery partners — every platform, every storm.*
-
-**☸ Suraksha**
+**Suraksha — One Insurance. Every Partner. Every Platform.**
 
 </div>
